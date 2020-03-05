@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>TeamFine</title>
+    <link rel="stylesheet" type="text/css" href="TeamFine_Styles.css"
+  </head>
+  <body>
+      <div id="pageContainer">
+        <!-- Popup new player -->
+          <div class="frmPopup" id="newPersonPopup">
+              <div class="frmPopupContent">
+                  <span class="close">&times;</span>
+                  <div class="popupOverskrift">New Player</div>
+                  <form id="frmNewPlayer">
+                      <h3>Name</h3>
+                      <input id="NP_inpName" type="text" required></input>
+                      <h3>Start fine</h3>
+                      <input id="NP_startFine" type="number"></input>
+                      <button type="submit">Submit</button>
+                  </form>
+              </div>
+          </div>
+        <!-- Popup new fine -->
+          <div class="frmPopup" id="newFinePopup">
+              <div class="frmPopupContent">
+                  <span class="close">&times;</span>
+                  <div class="popupOverskrift">New Fine</div>
+                  <form id="frmNewFine">
+                      <h3>Fine name</h3>
+                      <input id="NF_inpName" type="text" required></input>
+                      <h3>Amount</h3>
+                      <input id="NF_amount" type="number" step=".01" required></input>
+                      <button type="submit">Submit</button>
+                  </form>
+              </div>
+          </div>
+          <!-- Popup assign fine -->
+          <div class="frmPopup" id="assignFinePopup">
+              <div class="frmPopupContent">
+                  <span class="close">&times;</span>
+                  <div class="popupOverskrift">Assign Fine</div>
+                  <div id="assignFineHTML">
+                      <table id="tblFines"></table>
+                  </div>
+              </div>
+          </div>
+
+          <div class="frmPopup" id="assignFineCompletePopup">
+              <div class="frmPopupContent">
+                  <span class="close">&times;</span>
+                  <div class="popupOverskrift">Assign Fine</div>
+                  <div>
+                      <form id="frmAssignFine">
+                          <table>
+                              <tr><td>Players:</td><td id="playerNames"></td></tr>
+                              <tr><td>Fine:</td><td><input id="AF_name" type="text" readonly ></input></td></tr>
+                              <tr><td>Amount:</td><td><input id="AF_cost" type="number" step=".01"></input></td></tr>
+                              <tr><td colspan="2"><button type="submit">Give Fine</button></td></tr>
+                          </table>
+                      </form>
+                  </div>
+              </div>
+          </div>
+
+          <div id="header">
+              <div id="logo">
+                  <h1>TeamFine</h1>
+              </div>
+              <div id="menu">
+                  <div class="menu_btn" onclick="loadHome()">Home</div>
+                  <div class="menu_btn" onclick="updateTable(0)">Team</div>
+                  <div class="menu_btn" onclick="updateTable(1)">Fines</div>
+                  <div class="menu_btn" style="color:lightGreen" id="btnNewFine">New Fine</div>
+                  <div class="menu_btn" style="color:lightGreen" id="btnNewPlayer">New Player</div>
+                  <div class="menu_btn" style="border: 1px solid white; border-radius: 5px;" id="btnAssignFine">FINE</div>
+              </div>
+          </div>
+
+          <div id="content">
+            <div id="tableContainer">
+                <table>
+                    <thead id="tableHead"></thead>
+                    <tbody id="table"></tbody>
+                </table>
+            </div>
+        </div>
+          <div id="footer">
+
+          </div>
+      </div>
+      <script src="myClasses.js"></script>
+      <script src="main.js"></script>
+      <script>
+        var newPersonPopup = document.getElementById("newPersonPopup");
+        var newFinePopup = document.getElementById("newFinePopup");
+        var assignFinePopup = document.getElementById("assignFinePopup");
+        var newPersonPopup_close = document.getElementsByClassName("close")[0];
+        var newFinePopup_close = document.getElementsByClassName("close")[1];
+        var assignFinePopup_close = document.getElementsByClassName("close")[2];
+        var assignFineCompletePopup_close = document.getElementsByClassName("close")[3];
+
+        var NF_inpName = document.getElementById("NF_inpName");
+        var NF_amount = document.getElementById("NF_amount");
+
+        var NP_inpName = document.getElementById("NP_inpName");
+        var NP_startFine = document.getElementById("NP_startFine");
+
+
+        newPersonPopup_close.onclick = function() {
+            newPersonPopup.style.display = "none";
+            NP_inpName.value = "";
+            NP_startFine.value = "";
+        }
+        btnNewPlayer.onclick = function() {
+            newPersonPopup.style.display = "block";
+        }
+        window.onclick = function(event) {
+            if (event.target == newPersonPopup || event.target == newFinePopup || event.target == assignFinePopup || event.target == assignFineCompletePopup) {
+                newPersonPopup.style.display = "none";
+                newFinePopup.style.display = "none";
+                assignFinePopup.style.display = "none";
+                assignFineCompletePopup.style.display = "none";
+            }
+        }
+
+        newFinePopup_close.onclick = function() {
+            newFinePopup.style.display = "none";
+            NF_inpName.value = "";
+            NF_amount.value = "";
+
+        }
+        btnNewFine.onclick = function() {
+            newFinePopup.style.display = "block";
+
+        }
+
+        btnAssignFine.onclick = function(){
+            assignFinePopup.style.display = "block";
+        }
+        assignFinePopup_close.onclick = function(){
+            assignFinePopup.style.display = "none";
+        }
+
+        assignFineCompletePopup_close.onclick = function(){
+            assignFineCompletePopup.style.display = "none";
+        }
+
+      </script>
+  </body>
+</html>
